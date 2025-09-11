@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('biblioteca_items', function (Blueprint $table) {
             $table->id();
-            $table->string('archivoImage');
             $table->string('archivo');
             $table->integer('activo')->default(0);
             $table->unsignedBigInteger('biblioteca_id');
