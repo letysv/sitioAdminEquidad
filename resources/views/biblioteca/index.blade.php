@@ -1,42 +1,40 @@
 @extends('adminlte::page')
-@section('title','Publicaciones - Inicio')
+@section('title','Biblioteca - Inicio')
 @section('content')
-    @can('publicaciones.create')
-        <a class="btn btn-secondary mb-2" href="{{route('publicaciones.create')}}">Crear publicación</a>
+    @can('biblioteca.create')
+        <a class="btn btn-secondary mb-2" href="{{route('biblioteca.create')}}">Crear libro</a>
     @endcan
     <div class="card">
         <div class="card-body">
-            <table class="table table-light table-hover table-small" id="publicacionesTable">
+            <table class="table table-light table-hover table-small" id="bibliotecaTable">
                 <thead>
                     <tr>
                         <th class="text-center">ID</th>
                         <th class="text-left">Titulo</th>
-                        <th class="text-left">Apartado</th>
-                        @can('publicaciones.activate')
+                        <th class="text-left">Categoria</th>
+                        @can('biblioteca.activate')
                         <th class="text-center">Activo</th>
                         @endcan
-                        @can('publicaciones.edit')
+                        @can('biblioteca.edit')
                         <th class="text-center">Acción</th>
                         @endcan
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($publicaciones as $publicacion)
+                    @foreach ($biblioteca as $libro)
                         <tr> 
-                            <td class="text-center align-middle">{{ $publicacion->id }}</td>
-                            <td class="text-left align-middle">{{ $publicacion->titulo }}</td>
-                            <td class="text-left align-middle">
-                                {{ $publicacion->apartado == 1 ? 'Legislación sobre mujeres' : 'Documentos CEIGyDH' }}</td>
-                                {{-- {{ $publicacion->nombre }}</td> --}}
-                            @can('publicaciones.activate')
+                            <td class="text-center align-middle">{{ $libro->id }}</td>
+                            <td class="text-left align-middle">{{ $libro->titulo }}</td>
+                            <td class="text-left align-middle">{{ $libro->categoria->titulo ?? 'Sin categoría' }}</td>
+                            @can('biblioteca.activate')
                             <td class="text-center align-middle">
                                 {{-- Checkbox para cambiar el estado activo de la nota --}}
-                                <input class="cambiar-activo" type="checkbox" role="switch" id="cambiar-activo" data-id="{{ $publicacion->id }}" {{ $publicacion->activo ? 'checked' : '' }}>
+                                <input class="cambiar-activo" type="checkbox" role="switch" id="cambiar-activo" data-id="{{ $libro->id }}" {{ $libro->activo ? 'checked' : '' }}>
                             </td>
                             @endcan
                             <td width="10px">
-                                @can('publicaciones.edit')
-                                    <a class="btn btn-primary" href="{{ route('publicaciones.edit', $publicacion->id) }}">Editar</a>
+                                @can('biblioteca.edit')
+                                    <a class="btn btn-primary" href="{{ route('biblioteca.edit', $libro->id) }}">Editar</a>
                                 @endcan
                             </td>
                         </tr>
@@ -60,7 +58,7 @@
 @section('js')
     <script>
     $(document).ready(function() {
-        var tabla = $('#publicacionesTable');
+        var tabla = $('#bibliotecaTable');
         var dt = tabla.DataTable({
             language: {
                 "processing": 'Procesando...',
@@ -88,11 +86,11 @@
         // Manejar cambio de checkbox
         $(document).on('change', '#cambiar-activo', function() {
             var checkbox = $(this);
-            var publicacionId = checkbox.data('id');
+            var libroId = checkbox.data('id');
             var isChecked = checkbox.is(':checked') ? 1 : 0;
 
             $.ajax({
-                url: '/publicaciones/' + publicacionId + '/cambiaractivo',
+                url: '/biblioteca/' + libroId + '/cambiaractivo',
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',

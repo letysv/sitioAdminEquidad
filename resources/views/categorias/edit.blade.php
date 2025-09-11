@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Categorías - Inicio')
+@section('title', 'Categorías - Actualizar')
 @section('content')
 
     <form action="{{ route('categorias.update', $categoria->id) }}" method="POST">

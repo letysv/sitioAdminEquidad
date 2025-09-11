@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Roles - Inicio')
+@section('title', 'Roles - Actualizar')
 @section('content')
 
     <form action="{{ route('roles.update', $roles->id) }}" method="POST">

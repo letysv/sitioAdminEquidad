@@ -6,7 +6,7 @@
 
     Route::group(['prefix' => 'biblioteca', 'middleware' => ['auth']], function () {
     Route::get('/', [BibliotecaController::class, 'index'])
-        ->middleware('can:bibloteca')
+        ->middleware('can:biblioteca')
         ->name('biblioteca.index');
 
     Route::post('/itemcreate', [BibliotecaItemsController::class, 'create'])
@@ -27,7 +27,7 @@
     Route::post('/', [BibliotecaController::class, 'store'])
         ->name('biblioteca.store');
 
-    Route::post('/{id}/cambiaractivo', [BibliotecaItemsController::class, 'cambiarActivo'])
+    Route::post('/{id}/cambiaractivo', [BibliotecaController::class, 'cambiarActivo'])
         ->name('biblioteca.cambiar-activo');
 
     Route::delete('/item/{id}', [BibliotecaItemsController::class, 'destroy'])

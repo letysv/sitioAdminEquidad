@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title','Categorías - Inicio')
+@section('title','Categorías - Crear')
 @section('content')
     <form action="{{ route('categorias.store') }}" method="POST">
         @csrf

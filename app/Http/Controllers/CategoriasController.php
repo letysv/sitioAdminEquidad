@@ -61,7 +61,6 @@ class CategoriasController extends Controller
     {
         $categoria = Categorias::find($id);
         $categoria->titulo = $request->input('titulo');
-        $categoria->apartado = $request->input('apartado');
         $categoria->user_id = auth()->id(); // Assuming you want to associate the note with the authenticated user
         $categoria->save();
         return redirect()->route('categorias.index');

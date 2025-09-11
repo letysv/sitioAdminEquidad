@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title','Roles - Inicio')
+@section('title','Roles - Crear')
 @section('content')
     <form action="{{ route('roles.store') }}" method="POST">
         @csrf

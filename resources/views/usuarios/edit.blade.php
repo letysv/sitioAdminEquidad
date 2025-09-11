@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Usuarios - Inicio')
+@section('title', 'Usuarios - Actualizar')
 @section('content')
 
     <form action="{{ route('usuarios.update', $usuario->id) }}" method="POST">

@@ -8,12 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Biblioteca extends Model
 {
     use HasFactory;
-    protected $table = 'bliblioteca';
+    protected $table = 'biblioteca';
 
-    protected $fillable = ['id','titulo']; 
+    protected $fillable = ['id','titulo', 'categoria_id']; 
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categorias::class, 'categoria_id');
+    }
 
     public function items()
     {
-        return $this->hasMany(BibliotecaItems::class, 'bliblioteca_id');
+        return $this->hasMany(BibliotecaItems::class, 'biblioteca_id');
     }
 }

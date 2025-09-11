@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('categorias_libros', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

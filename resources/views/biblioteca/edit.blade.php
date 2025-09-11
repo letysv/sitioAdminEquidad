@@ -1,31 +1,28 @@
 @extends('adminlte::page')
-@section('title','Publicaciones - Actualizar')
+@section('title','Biblioteca - Actualizar')
 @section('content')
-<form action="{{ route('publicaciones.update', $publicacion->id) }}" method="POST">
-    @csrf
-    <div class="form-group">
-        <label for="titulo">Título</label>
-        <input type="text" class="form-control" id="titulo" name="titulo" value="{{$publicacion->titulo}}" required>
-    </div>
-    <div class="form-group">
-            <label for="apartado">Apartado:</label>
-            <select class="form-control" id="apartado" name="apartado" required>
-                <option value="">Seleccione un apartado:</option>
-                <option value="1" {{ $publicacion->apartado == 1 ? 'selected' : '' }}>Legislación sobre mujeres</option>
-                <option value="2" {{ $publicacion->apartado == 2 ? 'selected' : '' }}>Documentos CEIGyDH</option>
+    <form action="{{ route('biblioteca.update', $libro->id) }}" method="POST">
+        @csrf
+        <div class="form-group">
+            <label for="titulo">Título</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" value="{{ $libro->titulo }}" required>
+        </div>
+        <div class="form-group">
+            <label for="categoria_id">Categoría:</label>
+            <select class="form-control" id="categoria_id" name="categoria_id" required>
+                <option value="">Seleccione una categoría:</option>
+                @foreach($categorias as $categoria)
+                    <option value="{{ $categoria->id }}" {{ $libro->categoria_id == $categoria->id ? 'selected' : '' }}>
+                        {{ $categoria->titulo }}</option>
+                @endforeach
             </select>
         </div>
-    <div class="form-group" hidden>
-        <input type="number" class="form-control" id="publicacion_id" name="publicacion_id" value="{{$publicacion->id}}" required>
-    </div>
 
-    <div class="mt-3">
-        <button type="submit" class="btn btn-primary mr-3">Guardar publicación</button>
-        <a href="{{route('publicaciones.index')}}" class="btn btn-secondary">Cancelar</a>
-    </div>
-</form>
+        <button type="submit" class="btn btn-primary mr-3">Guardar libro</button>
+        <a href="{{route('biblioteca.index')}}" class="btn btn-secondary">Cancelar</a>
+    </form>
 
-<div class="card p-3 mt-4">
+    <div class="card p-3 mt-4">
     <div class="row">
         <div class="col-sm-12 col-lg-6">
             <div class="card-body">
@@ -44,7 +41,7 @@
                             {{-- <td class="align-middle">{{ $item->descripcion }}</td> --}}
                             <td class="align-middle">{{ $item->archivo }}</td>
                             <td>
-                                <form id="delete-form-{{ $item->id }}" action="{{ route('publicaciones.item.destroy', $item->id) }}" method="POST" class="d-inline">
+                                <form id="delete-form-{{ $item->id }}" action="{{ route('biblioteca.item.destroy', $item->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="btn btn-danger delete-btn" data-form-id="delete-form-{{ $item->id }}">
@@ -58,7 +55,7 @@
                 </table>
                 @else
                 <div class="alert alert-info">
-                    No hay items asociados a esta publicación. Puedes agregar nuevos items utilizando el formulario de carga de archivos.
+                    No hay items asociados a este libro. Puedes agregar nuevos items utilizando el formulario de carga de archivos.
                 </div>
                 @endif
             </div>
@@ -81,7 +78,7 @@
                             </div>
                         </div>--}}
                     </div>
-                    <button type="button" class="btn btn-primary" id="agregarItemPublicacion">Agregar Item</button>
+                    <button type="button" class="btn btn-primary" id="agregarItemLibro">Agregar Item</button>
                 </form>
             </div>
         </div>
@@ -138,7 +135,7 @@
 
 <script>
     
-    $("#agregarItemPublicacion").click(function(event) {
+    $("#agregarItemLibro").click(function(event) {
         event.preventDefault();
         // var validate = validar('frmDocumentos');
 
@@ -149,9 +146,9 @@
         }
         data.append('archivo', $('#ctrl_archivo')[0].files[0]);
         // data.append('descripcion', $("#nombre_item").val());
-        data.append('publicacion_id', $("#publicacion_id").val());
+        data.append('biblioteca_id', $("#biblioteca_id").val());
 
-        guardarArchivo(data, "{{route('publicaciones.item.create')}}");
+        guardarArchivo(data, "{{route('biblioteca.item.create')}}");
 
     });
 </script>

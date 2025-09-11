@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Biblioteca;
+use App\Models\Categorias;
 use App\Models\BibliotecaItems;
 
 class BibliotecaController extends Controller
@@ -13,10 +15,10 @@ class BibliotecaController extends Controller
      */
     public function index()
     {
-        $libro = Biblioteca::all();
+        // $libro = Biblioteca::all();
+        $biblioteca = Biblioteca::with('categoria')->get();
 
-
-        return view('biblioteca.index', compact('libro'));
+        return view('biblioteca.index', compact('biblioteca'));
     }
 
     /**
@@ -24,7 +26,9 @@ class BibliotecaController extends Controller
      */
     public function create()
     {
-        return view('biblioteca.create');
+        $categorias = Categorias::all(); 
+        
+        return view('biblioteca.create', compact('categorias'));
     }
 
     /**
@@ -34,6 +38,7 @@ class BibliotecaController extends Controller
     {
         $libro = new Biblioteca();
         $libro->titulo = $request->input('titulo');
+        $libro->categoria_id = $request->input('categoria_id'); 
         $libro->user_id = auth()->id(); // Assuming you want to associate the note with the authenticated user
         $libro->save();
         return redirect()->route('biblioteca.edit', $libro->id)->with('success', 'Libro creado exitosamente.');
@@ -53,9 +58,10 @@ class BibliotecaController extends Controller
     public function edit(string $id)
     {
         $libro = Biblioteca::findOrFail($id); // Encuentra el publicacion o devuelve 404
+        $categorias = Categorias::all(); 
         $items = $libro->items(); // Assuming you have a relationship defined in the Avisos model
-        $items = BibliotecaItems::where('bliblioteca_id', $id)->get(); // Assuming you have a AvisosItems model for items related to the note
-        return view('biblioteca.edit', compact('libro','items'));
+        $items = BibliotecaItems::where('biblioteca_id', $id)->get(); // Assuming you have a AvisosItems model for items related to the note
+        return view('biblioteca.edit', compact('libro','categorias','items'));
     }
 
     public function cambiarActivo(Request $request, $id)
@@ -74,6 +80,7 @@ class BibliotecaController extends Controller
     {
         $libro = Biblioteca::find($id);
         $libro->titulo = $request->input('titulo');
+        $libro->categoria_id = $request->input('categoria_id'); 
         $libro->user_id = auth()->id(); // Assuming you want to associate the note with the authenticated user
         $libro->save();
         return redirect()->route('biblioteca.index');

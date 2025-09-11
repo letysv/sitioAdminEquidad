@@ -9,10 +9,10 @@ class BibliotecaItems extends Model
 {
     use HasFactory;
     protected $table = 'biblioteca_items';
-    protected $fillable = ['id', 'bliblioteca_id', 'archivo', 'activo'];
+    protected $fillable = ['id','archivo', 'activo', 'biblioteca_id'];
 
     public function biblioteca()
     {
-        return $this->belongsTo(Biblioteca::class, 'bliblioteca_id');
+        return $this->belongsTo(Biblioteca::class, 'biblioteca_id');
     }
 }

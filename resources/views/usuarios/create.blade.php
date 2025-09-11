@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Usuarios - Inicio')
+@section('title', 'Usuarios - Crear')
 @section('content')
 
     <form action="{{ route('usuarios.store') }}" method="POST">

@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title','Permisos - Inicio')
+@section('title','Permisos - Crear')
 @section('content')
     <form action="{{ route('permisos.store') }}" method="POST">
         @csrf

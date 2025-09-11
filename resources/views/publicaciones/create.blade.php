@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title','Publicaciones - Inicio')
+@section('title','Publicaciones - Crear')
 @section('content')
     <form action="{{ route('publicaciones.store') }}" method="POST">
         @csrf

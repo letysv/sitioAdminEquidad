@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Permisos - Inicio')
+@section('title', 'Permisos - Actualizar')
 @section('content')
 
     <form action="{{ route('permisos.update', $permisos->id) }}" method="POST">
