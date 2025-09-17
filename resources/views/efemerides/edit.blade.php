@@ -1,31 +1,33 @@
 @extends('adminlte::page')
-@section('title','Biblioteca - Actualizar')
+@section('title','Efemérides - Actualizar')
 @section('content')
-    <form action="{{ route('biblioteca.update', $libro->id) }}" method="POST">
-        @csrf
-        <div class="form-group">
-            <label for="titulo">Título</label>
-            <input type="text" class="form-control" id="titulo" name="titulo" value="{{ $libro->titulo }}" required>
-        </div>
-        <div class="form-group">
-            <label for="categoria_id">Categoría:</label>
-            <select class="form-control" id="categoria_id" name="categoria_id" required>
-                <option value="">Seleccione una categoría:</option>
-                @foreach($categorias as $categoria)
-                    <option value="{{ $categoria->id }}" {{ $libro->categoria_id == $categoria->id ? 'selected' : '' }}>
-                        {{ $categoria->titulo }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group" hidden>
-            <input type="number" class="form-control" id="biblioteca_id" name="biblioteca_id" value="{{$libro->id}}" required>
-        </div>
+<form action="{{ route('efemerides.update', $efemeride->id) }}" method="POST">
+    @csrf
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" value="{{$efemeride->nombre}}" required>
+    </div>
+    <div class="form-group">
+        <label for="fecha">Fecha</label>
+        <input
+            type="date"
+            class="form-control"
+            id="fecha"
+            name="fecha"
+            value="{{ old('fecha', optional($efemeride->fecha)->format('Y-m-d')) }}"
+            required>
+    </div>
+    <div class="form-group" hidden>
+        <input type="number" class="form-control" id="efemeride_id" name="efemeride_id" value="{{$efemeride->id}}" required>
+    </div>
 
-        <button type="submit" class="btn btn-primary mr-3">Guardar libro</button>
-        <a href="{{route('biblioteca.index')}}" class="btn btn-secondary">Cancelar</a>
-    </form>
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary mr-3">Guardar efeméride</button>
+        <a href="{{route('efemerides.index')}}" class="btn btn-secondary">Cancelar</a>
+    </div>
+</form>
 
-    <div class="card p-3 mt-4">
+<div class="card p-3 mt-4">
     <div class="row">
         <div class="col-sm-12 col-lg-6">
             <div class="card-body">
@@ -34,7 +36,6 @@
                     <thead>
                         <tr>
                             {{-- <th>Nombre</th> --}}
-                            <th>Portada libro</th>
                             <th>Archivo</th>
                             <th>Acción</th>
                         </tr>
@@ -43,10 +44,9 @@
                         @foreach ($items as $item)
                         <tr>
                             {{-- <td class="align-middle">{{ $item->descripcion }}</td> --}}
-                            <td class="align-middle">{{ $item->archivoImage }}</td>
                             <td class="align-middle">{{ $item->archivo }}</td>
                             <td>
-                                <form id="delete-form-{{ $item->id }}" action="{{ route('biblioteca.item.destroy', $item->id) }}" method="POST" class="d-inline">
+                                <form id="delete-form-{{ $item->id }}" action="{{ route('efemerides.item.destroy', $item->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="btn btn-danger delete-btn" data-form-id="delete-form-{{ $item->id }}">
@@ -60,7 +60,7 @@
                 </table>
                 @else
                 <div class="alert alert-info">
-                    No hay items asociados a este libro. Puedes agregar nuevos items utilizando el formulario de carga de archivos.
+                    No hay items asociados a esta efeméride. Puedes agregar nuevos items utilizando el formulario de carga de archivos.
                 </div>
                 @endif
             </div>
@@ -70,12 +70,6 @@
                 <form class="frmItems" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="ctrl_archivo_img" class="form-label">Portada libro</label>
-                                <input type="file" class="form-control" id="ctrl_archivo_img" name="archivoImage" accept="image/jpeg" required>
-                            </div>
-                        </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="ctrl_archivo" class="form-label">Archivo</label>
@@ -89,7 +83,7 @@
                             </div>
                         </div>--}}
                     </div>
-                    <button type="button" class="btn btn-primary" id="agregarItemLibro">Agregar Item</button>
+                    <button type="button" class="btn btn-primary" id="agregarItemEfemeride">Agregar Item</button>
                 </form>
             </div>
         </div>
@@ -146,25 +140,20 @@
 
 <script>
     
-    $("#agregarItemLibro").click(function(event) {
+    $("#agregarItemEfemeride").click(function(event) {
         event.preventDefault();
         // var validate = validar('frmDocumentos');
 
         var data = new FormData();
-        var archivoImage = $('#ctrl_archivo_img')[0].files[0]; // Obtiene el archivo seleccionado
         var archivo = $('#ctrl_archivo')[0].files[0]; // Obtiene el archivo seleccionado
-        if (archivoImage) {
-            var nombreArchivoImage = archivoImage.nameImage; // Obtiene el nombre del archivo
-        }
         if (archivo) {
             var nombreArchivo = archivo.name; // Obtiene el nombre del archivo
         }
-        data.append('archivoImage', $('#ctrl_archivo_img')[0].files[0]);
         data.append('archivo', $('#ctrl_archivo')[0].files[0]);
         // data.append('descripcion', $("#nombre_item").val());
-        data.append('biblioteca_id', $("#biblioteca_id").val());
+        data.append('efemeride_id', $("#efemeride_id").val());
 
-        guardarArchivo(data, "{{route('biblioteca.item.create')}}");
+        guardarArchivo(data, "{{route('efemerides.item.create')}}");
 
     });
 </script>

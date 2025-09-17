@@ -9,7 +9,7 @@ class BibliotecaItems extends Model
 {
     use HasFactory;
     protected $table = 'biblioteca_items';
-    protected $fillable = ['id','archivo', 'activo', 'biblioteca_id'];
+    protected $fillable = ['id','archivo', 'archivoImage', 'activo', 'biblioteca_id'];
 
     public function biblioteca()
     {

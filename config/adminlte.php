@@ -354,8 +354,8 @@ return [
         [
             'text' => 'Efemérides',
             'icon' => 'fas fa-fw fa-calendar',
-            'url' => 'usuarios.index'
-            // 'can' => 'usuarios', 
+            'route' => 'efemerides.index',
+            'can' => 'efemerides', 
         ],
         [
             'text' => 'Enlaces recomendados',

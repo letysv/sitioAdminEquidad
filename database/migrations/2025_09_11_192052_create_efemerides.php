@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('biblioteca_items', function (Blueprint $table) {
+        Schema::create('efemerides', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('biblioteca_id');
-            $table->foreign('biblioteca_id')->references('id')->on('biblioteca');
-            $table->string('archivo');
-            $table->string('archivoImage');
-            $table->integer('activo')->default(0);
+            $table->string('nombre');
+            $table->date('fecha');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('biblioteca_items');
+        Schema::dropIfExists('efemerides');
     }
 };
