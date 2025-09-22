@@ -36,7 +36,6 @@ class EfemeridesItemsController extends Controller
             DB::beginTransaction();
             $itemEfemeride = new EfemeridesItems();
             $itemEfemeride->archivo = $nombreArchivo;
-            $itemEfemeride->activo = 1;
             $itemEfemeride->efemeride_id = $request->efemeride_id;
             $itemEfemeride->save();
             DB::commit();

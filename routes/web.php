@@ -45,6 +45,9 @@ Route::middleware(['auth'])->group(function () {
     require __DIR__ . '/publicaciones.php';
     require __DIR__ . '/biblioteca.php';
     require __DIR__ . '/efemerides.php';
+    require __DIR__ . '/informes.php';
+    require __DIR__ . '/enlaces.php';
+    require __DIR__ . '/actividades.php';
     require __DIR__ . '/roles.php';
     require __DIR__ . '/permisos.php';
 });

@@ -358,16 +358,22 @@ return [
             'can' => 'efemerides', 
         ],
         [
+            'text' => 'Informes Legislativos',
+            'icon' => 'fas fa-fw fa-book-open',
+            'route' => 'informes.index',
+            'can' => 'informes', 
+        ],
+        [
             'text' => 'Enlaces recomendados',
             'icon' => 'fas fa-fw fa-link',
-            'url' => 'usuarios.index'
-            // 'can' => 'usuarios', 
+            'route' => 'enlaces.index',
+            'can' => 'enlaces', 
         ],
         [
             'text' => 'Actividades realizadas',
             'icon' => 'fas fa-fw fa-check',
-            'url' => 'usuarios.index'
-            // 'can' => 'usuarios', 
+            'route' => 'actividades.index',
+            'can' => 'actividades', 
         ],
         // [
         //     'text' => 'Aviso de privacidad',

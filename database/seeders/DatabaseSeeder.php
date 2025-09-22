@@ -24,6 +24,9 @@ class DatabaseSeeder extends Seeder
             RolSeeder::class,
             UsuariosSeeder::class,
             CategoriasSeeder::class,
+            EjerciciosSeeder::class,
+            PeriodosSeeder::class,
+            ActividadesSeeder::class,
         ]);
     }
 }

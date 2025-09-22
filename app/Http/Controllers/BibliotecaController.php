@@ -17,7 +17,7 @@ class BibliotecaController extends Controller
     {
         // $libro = Biblioteca::all();
         $biblioteca = Biblioteca::with('categoria')->get();
-
+        
         return view('biblioteca.index', compact('biblioteca'));
     }
 

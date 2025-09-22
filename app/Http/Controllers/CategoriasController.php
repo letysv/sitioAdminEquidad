@@ -32,7 +32,6 @@ class CategoriasController extends Controller
     {
         $categoria = new Categorias();
         $categoria->titulo = $request->input('titulo');
-        $categoria->user_id = auth()->id(); // Assuming you want to associate the note with the authenticated user
         $categoria->save();
         return redirect()->route('categorias.edit', $categoria->id)->with('success', 'Categoría creada exitosamente.');
     }
@@ -61,7 +60,6 @@ class CategoriasController extends Controller
     {
         $categoria = Categorias::find($id);
         $categoria->titulo = $request->input('titulo');
-        $categoria->user_id = auth()->id(); // Assuming you want to associate the note with the authenticated user
         $categoria->save();
         return redirect()->route('categorias.index');
     }

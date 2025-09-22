@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PublicacionesItems;
+use App\Models\ActividadesRealizadasItems;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 
-class PublicacionesItemsController extends Controller
+class ActividadesRealizadasItemsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,26 +26,25 @@ class PublicacionesItemsController extends Controller
         try {
             // Se almacena el archivo
             $archivo_recibido = $request->file('archivo');
-            $ruta = "publicaciones/";
+            $ruta = "actividades/";
             $extension = $archivo_recibido->getClientOriginalExtension();
-            $nombreArchivo = "publicacion_" . $request->publicacion_id . '-' . now()->format('Y-m-d_H-i-s') . '.' . $extension;
+            $nombreArchivo = "actividad_" . $request->actividad_id . '-' . now()->format('Y-m-d_H-i-s') . '.' . $extension;
 
             $path = Storage::disk('public')->putFileAs($ruta, $archivo_recibido, $nombreArchivo);
 
             // Se guarda el registro en la BD
             DB::beginTransaction();
-            $itemPublicacion = new PublicacionesItems();
-            $itemPublicacion->archivo = $nombreArchivo;
-            $itemPublicacion->activo = 1;
-            $itemPublicacion->publicacion_id = $request->publicacion_id;
-            $itemPublicacion->save();
+            $itemActividad = new ActividadesRealizadasItems();
+            $itemActividad->archivo = $nombreArchivo;
+            $itemActividad->actividad_id = $request->actividad_id;
+            $itemActividad->save();
             DB::commit();
             return response()->json([
                 'success' => true,
                 'message' => 'Archivo agregado correctamente.',
                 'data' => [
                     'respuesta' => 1,
-                    'redirect' => route('publicaciones.edit', ['id' => $request->publicacion_id])
+                    'redirect' => route('actividades.edit', ['id' => $request->actividad_id])
                 ]
             ]);
         } catch (\Illuminate\Database\QueryException $e) {
@@ -91,20 +90,20 @@ class PublicacionesItemsController extends Controller
      */
     public function destroy(string $id)
     {
-        $idPadre = PublicacionesItems::where('id', $id)->value('publicacion_id');
-        $archivo = PublicacionesItems::where('id', $id)->value('archivo');
-        $itemPublicacion = PublicacionesItems::findOrFail($id);
+        $idPadre = ActividadesRealizadasItems::where('id', $id)->value('actividad_id');
+        $archivo = ActividadesRealizadasItems::where('id', $id)->value('archivo');
+        $itemActividad = ActividadesRealizadasItems::findOrFail($id);
 
         try {
             DB::beginTransaction();
             // Eliminar el archivo del storage si existe
-            if ($archivo && Storage::disk('public')->exists('publicaciones/' . $archivo)) {
-                Storage::disk('public')->delete('publicaciones/' . $archivo);
+            if ($archivo && Storage::disk('public')->exists('actividades/' . $archivo)) {
+                Storage::disk('public')->delete('actividades/' . $archivo);
             }
 
-            $itemPublicacion->delete();
+            $itemActividad->delete();
             DB::commit();
-            return redirect()->route('publicaciones.edit', ['id' => $idPadre])
+            return redirect()->route('actividades.edit', ['id' => $idPadre])
                 ->with('success', 'Item eliminado correctamente.');
                 
         } catch (\Illuminate\Database\QueryException $e) {
