@@ -25,9 +25,9 @@
             <label for="actividad_id">Actividad</label>
             <select class="form-control" id="actividad_id" name="actividad_id" required>
                 <option value="">Seleccione una actividad</option>
-                @foreach($actividades as $actividad)
-                    <option value="{{ $actividad->id }}" {{ $actividad->actividad_id == $actividad->id ? 'selected' : '' }}>
-                        {{ $actividad->nombre }}</option>
+                @foreach($actividades as $actividadOpcion)
+                    <option value="{{ $actividadOpcion->id }}" {{ $actividad->actividad_id == $actividadOpcion->id ? 'selected' : '' }}>
+                        {{ $actividadOpcion->nombre }}</option>
                 @endforeach
             </select>
         </div>

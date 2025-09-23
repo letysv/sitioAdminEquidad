@@ -23,6 +23,11 @@ class RolSeeder extends Seeder
         Permission::create(['name' => 'usuarios.edit'])->syncRoles([$rolDesarrollo]);
         Permission::create(['name' => 'usuarios.update'])->syncRoles([$rolDesarrollo]);
 
+        Permission::create(['name' => 'equipo'])->syncRoles([$rolDesarrollo]);
+        Permission::create(['name' => 'equipo.create'])->syncRoles([$rolDesarrollo]);
+        Permission::create(['name' => 'equipo.edit'])->syncRoles([$rolDesarrollo]);
+        Permission::create(['name' => 'equipo.update'])->syncRoles([$rolDesarrollo]);
+
         Permission::create(['name' => 'publicaciones'])->syncRoles([$rolDesarrollo]);
         Permission::create(['name' => 'publicaciones.create'])->syncRoles([$rolDesarrollo]);
         Permission::create(['name' => 'publicaciones.edit'])->syncRoles([$rolDesarrollo]);

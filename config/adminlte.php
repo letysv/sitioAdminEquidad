@@ -327,12 +327,12 @@ return [
         //     'url' => 'usuarios.index'
         //     // 'can' => 'usuarios', 
         // ],
-        // [
-        //     'text' => 'Equipo CEIGyDH',
-        //     'icon' => 'fas fa-fw fa-users',
-        //     'url' => 'usuarios.index'
-        //     // 'can' => 'usuarios', 
-        // ],
+        [
+            'text' => 'Equipo CEIGyDH',
+            'icon' => 'fas fa-fw fa-users',
+            'route' => 'equipo.index',
+            'can' => 'equipo', 
+        ],
         [
             'text' => 'Publicaciones',
             'icon' => 'fas fa-fw fa-newspaper',
