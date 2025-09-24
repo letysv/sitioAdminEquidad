@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
 
     require __DIR__ . '/usuarios.php';
     require __DIR__ . '/equipo.php';
+    require __DIR__ . '/notas.php';
     require __DIR__ . '/categorias.php';
     require __DIR__ . '/publicaciones.php';
     require __DIR__ . '/biblioteca.php';

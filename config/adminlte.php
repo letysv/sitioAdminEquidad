@@ -334,6 +334,12 @@ return [
             'can' => 'equipo', 
         ],
         [
+            'text' => 'Notas',
+            'icon' => 'fas fa-fw fa-image',
+            'route' => 'notas.index',
+            'can' => 'notas', 
+        ],
+        [
             'text' => 'Publicaciones',
             'icon' => 'fas fa-fw fa-newspaper',
             'route' => 'publicaciones.index',
