@@ -18,6 +18,28 @@ class EquipoController extends Controller
     }
 
     /**
+ * Equipo específica en json
+ */
+    public function apiEquipo($id)
+    {
+        $equipo = Equipo::with('items')->find($id);
+        if ($equipo) {
+            return response()->json($equipo);
+        } else {
+            return response()->json(['error' => 'Miembro no encontrada'], 404);
+        }
+    }
+
+    /**
+     * Colección de equipo con sus items en json
+     */
+    public function apiEquipos()
+    {
+        $equipos = Equipo::with('items')->get();
+        return response()->json($equipos);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

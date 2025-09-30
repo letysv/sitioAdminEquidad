@@ -22,6 +22,28 @@ class ActividadesRealizadasController extends Controller
     }
 
     /**
+ * Actividad específica en json
+ */
+    public function apiActividad($id)
+    {
+        $actividad = ActividadesRealizadas::with('items')->find($id);
+        if ($actividad) {
+            return response()->json($actividad);
+        } else {
+            return response()->json(['error' => 'Actividad no encontrada'], 404);
+        }
+    }
+
+    /**
+     * Colección de actividads con sus items en json
+     */
+    public function apiActividades()
+    {
+        $actividades = ActividadesRealizadas::with('items')->get();
+        return response()->json($actividades);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

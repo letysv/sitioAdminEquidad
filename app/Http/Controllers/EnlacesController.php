@@ -18,6 +18,29 @@ class EnlacesController extends Controller
     }
 
     /**
+ * Enlace específica en json
+ */
+    public function apiEnlace($id)
+    {
+        // $enlace = Enlaces::with('items')->find($id);
+        $enlace = Enlaces::find($id);
+        if ($enlace) {
+            return response()->json($enlace);
+        } else {
+            return response()->json(['error' => 'Enlace no encontrada'], 404);
+        }
+    }
+
+    /**
+     * Colección de enlance con sus items en json
+     */
+    // public function apiEnlaces()
+    // {
+    //     $enlaces = Enlaces::with('items')->get();
+    //     return response()->json($enlaces);
+    // }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

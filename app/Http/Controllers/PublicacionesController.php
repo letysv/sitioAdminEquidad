@@ -20,6 +20,28 @@ class PublicacionesController extends Controller
     }
 
     /**
+ * Publicacion específica en json
+ */
+    public function apiPublicacion($id)
+    {
+        $publicacion = Publicaciones::with('items')->find($id);
+        if ($publicacion) {
+            return response()->json($publicacion);
+        } else {
+            return response()->json(['error' => 'Publicación no encontrada'], 404);
+        }
+    }
+
+    /**
+     * Colección de publicaciones con sus items en json
+     */
+    public function apiPublicaciones()
+    {
+        $publicaciones = Publicaciones::with('items')->get();
+        return response()->json($publicaciones);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

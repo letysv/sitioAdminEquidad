@@ -22,6 +22,28 @@ class InformesController extends Controller
     }
 
     /**
+ * Informe específica en json
+ */
+    public function apiInforme($id)
+    {
+        $informe = Informes::with('items')->find($id);
+        if ($informe) {
+            return response()->json($informe);
+        } else {
+            return response()->json(['error' => 'Informe no encontrado'], 404);
+        }
+    }
+
+    /**
+     * Colección de informes con sus items en json
+     */
+    public function apiInformes()
+    {
+        $informes = Informes::with('items')->get();
+        return response()->json($informes);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

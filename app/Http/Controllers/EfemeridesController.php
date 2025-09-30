@@ -20,6 +20,29 @@ class EfemeridesController extends Controller
     }
 
     /**
+ * Efemeride específica en json
+ */
+    public function apiEfemeride($id)
+    {
+        
+       $efemeride = Efemerides::with('items')->find($id);
+        if ($efemeride) {
+            return response()->json($efemeride);
+        } else {
+            return response()->json(['error' => 'Efemeride no encontrada'], 404);
+        }
+    }
+
+    /**
+     * Colección de efemerides con sus items en json
+     */
+    public function apiEfemerides()
+    {
+        $efemerides = Efemerides::with('items')->get();
+        return response()->json($efemerides);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()

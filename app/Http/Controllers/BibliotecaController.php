@@ -22,6 +22,28 @@ class BibliotecaController extends Controller
     }
 
     /**
+ * Libro específica en json
+ */
+    public function apiLibro($id)
+    {
+        $libro = Biblioteca::with('items')->find($id);
+        if ($libro) {
+            return response()->json($libro);
+        } else {
+            return response()->json(['error' => 'Libro no encontrada'], 404);
+        }
+    }
+
+    /**
+     * Colección de libros con sus items en json
+     */
+    public function apiLibros()
+    {
+        $libros = Biblioteca::with('items')->get();
+        return response()->json($libros);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
