@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Publicaciones;
 use App\Models\PublicacionesItems;
+use App\Models\Apartado;
 
 class PublicacionesController extends Controller
 {
@@ -46,7 +47,8 @@ class PublicacionesController extends Controller
      */
     public function create()
     {
-        return view('publicaciones.create');
+        $apartados = Apartado::all();
+        return view('publicaciones.create', compact('apartados'));
     }
 
     /**
@@ -56,7 +58,7 @@ class PublicacionesController extends Controller
     {
         $publicacion = new Publicaciones();
         $publicacion->titulo = $request->input('titulo');
-        $publicacion->apartado = $request->input('apartado');
+        $publicacion->apartado_id = $request->input('apartado_id');
         $publicacion->user_id = auth()->id(); // Assuming you want to associate the note with the authenticated user
         $publicacion->save();
         return redirect()->route('publicaciones.edit', $publicacion->id)->with('success', 'Publicación creada exitosamente.');
@@ -76,9 +78,10 @@ class PublicacionesController extends Controller
     public function edit(string $id)
     {
         $publicacion = Publicaciones::findOrFail($id); // Encuentra el publicacion o devuelve 404
+        $apartados = Apartado::all();
         $items = $publicacion->items(); // Assuming you have a relationship defined in the Avisos model
         $items = PublicacionesItems::where('publicacion_id', $id)->get(); // Assuming you have a AvisosItems model for items related to the note
-        return view('publicaciones.edit', compact('publicacion','items'));
+        return view('publicaciones.edit', compact('publicacion', 'apartados','items'));
     }
 
     public function cambiarActivo(Request $request, $id)
@@ -97,7 +100,7 @@ class PublicacionesController extends Controller
     {
         $publicacion = Publicaciones::find($id);
         $publicacion->titulo = $request->input('titulo');
-        $publicacion->apartado = $request->input('apartado');
+        $publicacion->apartado_id = $request->input('apartado_id');
         $publicacion->user_id = auth()->id(); // Assuming you want to associate the note with the authenticated user
         $publicacion->save();
         return redirect()->route('publicaciones.index');

@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             EjerciciosSeeder::class,
             PeriodosSeeder::class,
             ActividadesSeeder::class,
+            ApartadosPublicacionesSeeder::class,
         ]);
     }
 }

@@ -25,9 +25,8 @@
                         <tr> 
                             <td class="text-center align-middle">{{ $publicacion->id }}</td>
                             <td class="text-left align-middle">{{ $publicacion->titulo }}</td>
-                            <td class="text-left align-middle">
-                                {{ $publicacion->apartado == 1 ? 'Legislación sobre mujeres' : 'Documentos CEIGyDH' }}</td>
-                                {{-- {{ $publicacion->nombre }}</td> --}}
+                            <td class="text-left align-middle">{{ $publicacion->apartado->nombre ?? 'N/A' }}
+                            </td>
                             @can('publicaciones.activate')
                             <td class="text-center align-middle">
                                 {{-- Checkbox para cambiar el estado activo de la nota --}}

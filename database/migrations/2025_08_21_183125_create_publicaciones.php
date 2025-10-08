@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('publicaciones', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
-            $table->string('apartado');
+            $table->unsignedBigInteger('apartado_id');
+            $table->foreign('apartado_id')->references('id')->on('apartados_publicaciones');
             // $table->integer('posicion')->default(0);
             $table->integer('activo')->default(0);
             $table->unsignedBigInteger('user_id');

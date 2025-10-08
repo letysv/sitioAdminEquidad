@@ -16,4 +16,9 @@ class Publicaciones extends Model
     {
         return $this->hasMany(PublicacionesItems::class, 'publicacion_id');
     }
+
+     public function apartado()
+    {
+        return $this->belongsTo(Apartado::class);
+    }
 }

@@ -8,11 +8,13 @@
         <input type="text" class="form-control" id="titulo" name="titulo" value="{{$publicacion->titulo}}" required>
     </div>
     <div class="form-group">
-            <label for="apartado">Apartado:</label>
-            <select class="form-control" id="apartado" name="apartado" required>
-                <option value="">Seleccione un apartado:</option>
-                <option value="1" {{ $publicacion->apartado == 1 ? 'selected' : '' }}>Legislación sobre mujeres</option>
-                <option value="2" {{ $publicacion->apartado == 2 ? 'selected' : '' }}>Documentos CEIGyDH</option>
+            <label for="apartado_id">Apartado</label>
+            <select class="form-control" id="apartado_id" name="apartado_id" required>
+                <option value="">Seleccione un apartado</option>
+                @foreach($apartados as $apartado)
+                    <option value="{{ $apartado->id }}" {{ $publicacion->apartado_id == $apartado->id ? 'selected' : '' }}>
+                        {{ $apartado->nombre }}</option>
+                @endforeach
             </select>
         </div>
     <div class="form-group" hidden>
