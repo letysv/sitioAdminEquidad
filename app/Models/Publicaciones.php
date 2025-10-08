@@ -10,7 +10,7 @@ class Publicaciones extends Model
     use HasFactory;
     protected $table = 'publicaciones';
 
-    protected $fillable = ['id','titulo', 'apartado']; 
+    protected $fillable = ['id','titulo', 'apartado_id']; 
 
     public function items()
     {
@@ -19,6 +19,6 @@ class Publicaciones extends Model
 
      public function apartado()
     {
-        return $this->belongsTo(Apartado::class);
+        return $this->belongsTo(Apartado::class, 'apartado_id');
     }
 }

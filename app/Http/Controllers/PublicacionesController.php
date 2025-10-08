@@ -21,8 +21,8 @@ class PublicacionesController extends Controller
     }
 
     /**
- * Publicacion específica en json
- */
+     * Publicacion específica en json
+     */
     public function apiPublicacion($id)
     {
         $publicacion = Publicaciones::with('items')->find($id);
@@ -38,7 +38,8 @@ class PublicacionesController extends Controller
      */
     public function apiPublicaciones()
     {
-        $publicaciones = Publicaciones::with('items')->get();
+        // $publicaciones = Publicaciones::with('items')->get();
+        $publicaciones = Publicaciones::with(['items', 'apartado:id,nombre'])->get();
         return response()->json($publicaciones);
     }
 
@@ -81,7 +82,7 @@ class PublicacionesController extends Controller
         $apartados = Apartado::all();
         $items = $publicacion->items(); // Assuming you have a relationship defined in the Avisos model
         $items = PublicacionesItems::where('publicacion_id', $id)->get(); // Assuming you have a AvisosItems model for items related to the note
-        return view('publicaciones.edit', compact('publicacion', 'apartados','items'));
+        return view('publicaciones.edit', compact('publicacion', 'apartados', 'items'));
     }
 
     public function cambiarActivo(Request $request, $id)
