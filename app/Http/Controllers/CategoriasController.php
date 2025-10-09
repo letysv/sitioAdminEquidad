@@ -22,11 +22,11 @@ class CategoriasController extends Controller
  */
     public function apiCategoria($id)
     {
-        $categoria = Categorias::with('items')->find($id);
+        $categoria = Categorias::find($id);
         if ($categoria) {
             return response()->json($categoria);
         } else {
-            return response()->json(['error' => 'Libro no encontrado'], 404);
+            return response()->json(['error' => 'Categoria no encontrada'], 404);
         }
     }
 
@@ -35,7 +35,7 @@ class CategoriasController extends Controller
      */
     public function apiCategorias()
     {
-        $categorias = Categorias::with('items')->get();
+        $categorias = Categorias::all();
         return response()->json($categorias);
     }
 
