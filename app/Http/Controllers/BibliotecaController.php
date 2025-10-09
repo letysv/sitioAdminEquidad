@@ -27,6 +27,7 @@ class BibliotecaController extends Controller
     public function apiBiblioteca($id)
     {
         $biblioteca = Biblioteca::with('items')->find($id);
+        $biblioteca = Biblioteca::with(['items', 'categoria:id,titulo'])->get();
         if ($biblioteca) {
             return response()->json($biblioteca);
         } else {
