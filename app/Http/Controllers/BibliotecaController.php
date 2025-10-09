@@ -24,23 +24,24 @@ class BibliotecaController extends Controller
     /**
  * Libro específica en json
  */
-    public function apiLibro($id)
+    public function apiBiblioteca($id)
     {
-        $libro = Biblioteca::with('items')->find($id);
-        if ($libro) {
-            return response()->json($libro);
+        $biblioteca = Biblioteca::with('items')->find($id);
+        if ($biblioteca) {
+            return response()->json($biblioteca);
         } else {
-            return response()->json(['error' => 'Libro no encontrada'], 404);
+            return response()->json(['error' => 'Libro no encontrado'], 404);
         }
     }
 
     /**
      * Colección de libros con sus items en json
      */
-    public function apiLibros()
+    public function apiBibliotecas()
     {
-        $libros = Biblioteca::with('items')->get();
-        return response()->json($libros);
+        $bibliotecas = Biblioteca::with('items')->get();
+        $bibliotecas = Biblioteca::with(['items', 'categoria:id,titulo'])->get();
+        return response()->json($bibliotecas);
     }
 
     /**
