@@ -16,6 +16,28 @@ class CategoriasController extends Controller
 
         return view('categorias.index', compact('categorias'));
     }
+    
+ /**
+    * Libro específica en json
+ */
+    public function apiCategoria($id)
+    {
+        $categoria = Categorias::with('items')->find($id);
+        if ($categoria) {
+            return response()->json($categoria);
+        } else {
+            return response()->json(['error' => 'Libro no encontrado'], 404);
+        }
+    }
+
+    /**
+     * Colección de libros con sus items en json
+     */
+    public function apiCategorias()
+    {
+        $categorias = Categorias::with('items')->get();
+        return response()->json($categorias);
+    }
 
     /**
      * Show the form for creating a new resource.

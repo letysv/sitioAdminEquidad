@@ -18,6 +18,7 @@
 require __DIR__ . '/api_equipo.php';
 require __DIR__ . '/api_notas.php';
 require __DIR__ . '/api_publicaciones.php';
+require __DIR__ . '/api_categorias.php';
 require __DIR__ . '/api_biblioteca.php';
 require __DIR__ . '/api_efemerides.php';
 require __DIR__ . '/api_informes.php';
