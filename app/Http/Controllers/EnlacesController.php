@@ -22,7 +22,6 @@ class EnlacesController extends Controller
  */
     public function apiEnlace($id)
     {
-        // $enlace = Enlaces::with('items')->find($id);
         $enlace = Enlaces::find($id);
         if ($enlace) {
             return response()->json($enlace);
@@ -34,11 +33,11 @@ class EnlacesController extends Controller
     /**
      * Colección de enlance con sus items en json
      */
-    // public function apiEnlaces()
-    // {
-    //     $enlaces = Enlaces::with('items')->get();
-    //     return response()->json($enlaces);
-    // }
+    public function apiEnlaces()
+    {
+        $enlaces = Enlaces::all();
+        return response()->json($enlaces);
+    }
 
     /**
      * Show the form for creating a new resource.
