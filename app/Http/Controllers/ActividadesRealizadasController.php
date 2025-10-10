@@ -39,7 +39,7 @@ class ActividadesRealizadasController extends Controller
      */
     public function apiActividades()
     {
-        $actividades = ActividadesRealizadas::with('items')->get();
+        $actividades = ActividadesRealizadas::with(['items','actividad:id,nombre'])->get();
         return response()->json($actividades);
     }
 
@@ -49,10 +49,11 @@ class ActividadesRealizadasController extends Controller
     public function create()
     {
         $actividades = Actividades::all();
-        $periodos = Periodos::all();
-        $ejercicios = Ejercicio::all();
+        // $periodos = Periodos::all();
+        // $ejercicios = Ejercicio::all();
         
-        return view('actividades.create', compact('periodos','ejercicios','actividades'));
+        return view('actividades.create', compact('actividades'));
+        // return view('actividades.create', compact('periodos','ejercicios','actividades'));
     }
 
     /**
@@ -64,8 +65,8 @@ class ActividadesRealizadasController extends Controller
         $actividad->fecha = $request->input('fecha');
         $actividad->lugar = $request->input('lugar');
         $actividad->descripcion = $request->input('descripcion');
-        $actividad->ejercicio_id = $request->input('ejercicio_id'); 
-        $actividad->periodo_id = $request->input('periodo_id'); 
+        // $actividad->ejercicio_id = $request->input('ejercicio_id'); 
+        // $actividad->periodo_id = $request->input('periodo_id'); 
         $actividad->actividad_id = $request->input('actividad_id');
         $actividad->user_id = auth()->id(); // Assuming you want to associate the note with the authenticated user
         $actividad->save();
@@ -87,11 +88,12 @@ class ActividadesRealizadasController extends Controller
     {
         $actividad = ActividadesRealizadas::findOrFail($id); // Encuentra la actividad o devuelve 404
         $actividades = Actividades::all();
-        $periodos = Periodos::all();
-        $ejercicios = Ejercicio::all();
+        // $periodos = Periodos::all();
+        // $ejercicios = Ejercicio::all();
         $items = $actividad->items(); // Assuming you have a relationship defined in the Avisos model
         $items = ActividadesRealizadasItems::where('actividad_id', $id)->get(); // Assuming you have a AvisosItems model for items related to the note
-        return view('actividades.edit', compact('actividad','periodos','ejercicios','actividades','items'));
+        return view('actividades.edit', compact('actividad','actividades','items'));
+        // return view('actividades.edit', compact('actividad','periodos','ejercicios','actividades','items'));
     }
 
     public function cambiarActivo(Request $request, $id)
@@ -112,8 +114,8 @@ class ActividadesRealizadasController extends Controller
         $actividad->fecha = $request->input('fecha');
         $actividad->lugar = $request->input('lugar');
         $actividad->descripcion = $request->input('descripcion');
-        $actividad->ejercicio_id = $request->input('ejercicio_id'); 
-        $actividad->periodo_id = $request->input('periodo_id'); 
+        // $actividad->ejercicio_id = $request->input('ejercicio_id'); 
+        // $actividad->periodo_id = $request->input('periodo_id'); 
         $actividad->actividad_id = $request->input('actividad_id');
         $actividad->user_id = auth()->id(); // Assuming you want to
         $actividad->save();

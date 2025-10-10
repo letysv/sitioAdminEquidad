@@ -30,7 +30,7 @@
                 @endforeach
             </select>
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="ejercicio_id">Año legislativo</label>
             <select class="form-control" id="ejercicio_id" name="ejercicio_id" required>
                 <option value="">Seleccione una año legislativo</option>
@@ -47,7 +47,7 @@
                     <option value="{{ $periodo->id }}">{{ $periodo->nombre }}</option>
                 @endforeach
             </select>
-        </div>
+        </div> --}}
 
         <button type="submit" class="btn btn-primary mr-3">Guardar actividad</button>
         <a href="{{route('actividades.index')}}" class="btn btn-secondary">Cancelar</a>

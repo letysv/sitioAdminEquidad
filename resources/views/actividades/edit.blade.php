@@ -31,7 +31,7 @@
                 @endforeach
             </select>
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label for="ejercicio_id">Año legislativo</label>
             <select class="form-control" id="ejercicio_id" name="ejercicio_id" required>
                 <option value="">Seleccione una año legislativo</option>
@@ -50,7 +50,7 @@
                         {{ $periodo->nombre }}</option>
                 @endforeach
             </select>
-        </div>
+        </div> --}}
         <div class="form-group" hidden>
             <input type="number" class="form-control" id="actividad_id" name="actividad_id" value="{{$actividad->id}}" required>
         </div>

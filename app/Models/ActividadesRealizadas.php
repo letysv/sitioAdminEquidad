@@ -17,14 +17,14 @@ class ActividadesRealizadas extends Model
     {
         return $this->hasMany(ActividadesRealizadasItems::class, 'actividad_id');
     }
-    public function ejercicio()
-    {
-        return $this->belongsTo(Ejercicio::class, 'ejercicio_id');
-    }
-    public function periodo()
-    {
-        return $this->belongsTo(Periodos::class, 'periodo_id');
-    }
+    // public function ejercicio()
+    // {
+    //     return $this->belongsTo(Ejercicio::class, 'ejercicio_id');
+    // }
+    // public function periodo()
+    // {
+    //     return $this->belongsTo(Periodos::class, 'periodo_id');
+    // }
     public function actividad()
     {
         return $this->belongsTo(Actividades::class, 'actividad_id');
