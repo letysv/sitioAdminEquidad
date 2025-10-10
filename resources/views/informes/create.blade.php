@@ -16,15 +16,6 @@
                 @endforeach
             </select>
         </div>
-        <div class="form-group">
-            <label for="periodo_id">Periodo legislativo</label>
-            <select class="form-control" id="periodo_id" name="periodo_id" required>
-                <option value="">Seleccione una periodo legislativo</option>
-                @foreach($periodos as $periodo)
-                    <option value="{{ $periodo->id }}">{{ $periodo->nombre }}</option>
-                @endforeach
-            </select>
-        </div>
 
         <button type="submit" class="btn btn-primary mr-3">Guardar informe</button>
         <a href="{{route('informes.index')}}" class="btn btn-secondary">Cancelar</a>

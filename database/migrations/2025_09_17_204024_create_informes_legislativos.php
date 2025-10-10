@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('titulo');
             $table->unsignedBigInteger('ejercicio_id');
             $table->foreign('ejercicio_id')->references('id')->on('ejercicio_legislativo');
-            $table->unsignedBigInteger('periodo_id');
+            $table->unsignedBigInteger('periodo_id')->nullable();
             $table->foreign('periodo_id')->references('id')->on('periodos');
             $table->integer('activo')->default(0);
             $table->unsignedBigInteger('user_id');

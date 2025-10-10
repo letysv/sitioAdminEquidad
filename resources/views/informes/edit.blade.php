@@ -17,16 +17,6 @@
                 @endforeach
             </select>
         </div>
-        <div class="form-group">
-            <label for="periodo_id">Periodo legislativo</label>
-            <select class="form-control" id="periodo_id" name="periodo_id" required>
-                <option value="">Seleccione una periodo legislativo</option>
-                @foreach($periodos as $periodo)
-                    <option value="{{ $periodo->id }}" {{ $informe->periodo_id == $periodo->id ? 'selected' : '' }}>
-                        {{ $periodo->nombre }}</option>
-                @endforeach
-            </select>
-        </div>
         <div class="form-group" hidden>
             <input type="number" class="form-control" id="informe_id" name="informe_id" value="{{$informe->id}}" required>
         </div>

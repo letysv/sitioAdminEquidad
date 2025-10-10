@@ -27,7 +27,7 @@ class BibliotecaController extends Controller
     public function apiBiblioteca($id)
     {
         $biblioteca = Biblioteca::with('items')->find($id);
-        $biblioteca = Biblioteca::with(['items', 'categoria:id,titulo'])->get();
+        // $biblioteca = Biblioteca::with(['items', 'categoria:id,titulo'])->get();
         if ($biblioteca) {
             return response()->json($biblioteca);
         } else {
@@ -40,8 +40,7 @@ class BibliotecaController extends Controller
      */
     public function apiBibliotecas()
     {
-        $bibliotecas = Biblioteca::with('items')->get();
-        $bibliotecas = Biblioteca::with(['items', 'categoria:id,titulo'])->get();
+        $bibliotecas = Biblioteca::with(['items','categoria:id,titulo'])->get();
         return response()->json($bibliotecas);
     }
 

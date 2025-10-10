@@ -21,9 +21,4 @@ class Informes extends Model
     {
         return $this->belongsTo(Ejercicio::class, 'ejercicio_id');
     }
-    
-    public function periodo()
-    {
-        return $this->belongsTo(Periodos::class, 'periodo_id');
-    }
 }

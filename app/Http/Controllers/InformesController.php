@@ -27,6 +27,7 @@ class InformesController extends Controller
     public function apiInforme($id)
     {
         $informe = Informes::with('items')->find($id);
+        // $informe = Informes::with(['items', 'ejercicio:id,nombre'])->get();
         if ($informe) {
             return response()->json($informe);
         } else {
@@ -39,7 +40,7 @@ class InformesController extends Controller
      */
     public function apiInformes()
     {
-        $informes = Informes::with('items')->get();
+        $informes = Informes::with(['items','ejercicio:id,nombre'])->get();
         return response()->json($informes);
     }
 
@@ -48,10 +49,9 @@ class InformesController extends Controller
      */
     public function create()
     {
-        $periodos = Periodos::all();
         $ejercicios = Ejercicio::all();
 
-        return view('informes.create', compact('periodos','ejercicios'));
+        return view('informes.create', compact('ejercicios'));
     }
 
     /**
@@ -62,7 +62,6 @@ class InformesController extends Controller
         $informe = new Informes();
         $informe->titulo = $request->input('titulo');
         $informe->ejercicio_id = $request->input('ejercicio_id'); 
-        $informe->periodo_id = $request->input('periodo_id'); 
         $informe->user_id = auth()->id(); // Assuming you want to associate the note with the authenticated user
         $informe->save();
         return redirect()->route('informes.edit', $informe->id)->with('success', 'Informe creada exitosamente.');
@@ -82,11 +81,10 @@ class InformesController extends Controller
     public function edit(string $id)
     {
         $informe = Informes::findOrFail($id); // Encuentra el informe o devuelve 404
-        $periodos = Periodos::all();
         $ejercicios = Ejercicio::all();
         $items = $informe->items(); // Assuming you have a relationship defined in the Avisos model
         $items = InformesItems::where('informe_id', $id)->get(); // Assuming you have a AvisosItems model for items related to the note
-        return view('informes.edit', compact('informe','periodos','ejercicios','items'));
+        return view('informes.edit', compact('informe','ejercicios','items'));
     }
 
     public function cambiarActivo(Request $request, $id)
@@ -106,7 +104,6 @@ class InformesController extends Controller
         $informe = Informes::find($id);
         $informe->titulo = $request->input('titulo');
         $informe->ejercicio_id = $request->input('ejercicio_id'); 
-        $informe->periodo_id = $request->input('periodo_id'); 
         $informe->user_id = auth()->id(); // Assuming you want to associate the note with the authenticated user
         $informe->save();
         return redirect()->route('informes.index');
