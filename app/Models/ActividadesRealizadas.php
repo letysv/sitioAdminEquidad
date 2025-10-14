@@ -25,8 +25,8 @@ class ActividadesRealizadas extends Model
     // {
     //     return $this->belongsTo(Periodos::class, 'periodo_id');
     // }
-    public function actividad()
+    public function evento()
     {
-        return $this->belongsTo(Actividades::class, 'actividad_id');
+        return $this->belongsTo(Eventos::class, 'evento_id');
     }
 }

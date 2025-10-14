@@ -22,11 +22,11 @@
             <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
         </div>
         <div class="form-group">
-            <label for="actividad_id">Actividad</label>
-            <select class="form-control" id="actividad_id" name="actividad_id" required>
+            <label for="evento_id">Actividad</label>
+            <select class="form-control" id="evento_id" name="evento_id" required>
                 <option value="">Seleccione una actividad</option>
-                @foreach($actividades as $actividad)
-                    <option value="{{ $actividad->id }}">{{ $actividad->nombre }}</option>
+                @foreach($eventos as $evento)
+                    <option value="{{ $evento->id }}">{{ $evento->nombre }}</option>
                 @endforeach
             </select>
         </div>

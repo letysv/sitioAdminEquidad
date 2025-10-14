@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Actividades;
+use App\Models\Eventos;
 use Illuminate\Http\Request;
 use App\Models\ActividadesRealizadas;
 use App\Models\ActividadesRealizadasItems;
@@ -48,11 +48,11 @@ class ActividadesRealizadasController extends Controller
      */
     public function create()
     {
-        $actividades = Actividades::all();
+        $eventos = Eventos::all();
         // $periodos = Periodos::all();
         // $ejercicios = Ejercicio::all();
         
-        return view('actividades.create', compact('actividades'));
+        return view('actividades.create', compact('eventos'));
         // return view('actividades.create', compact('periodos','ejercicios','actividades'));
     }
 
@@ -67,7 +67,7 @@ class ActividadesRealizadasController extends Controller
         $actividad->descripcion = $request->input('descripcion');
         // $actividad->ejercicio_id = $request->input('ejercicio_id'); 
         // $actividad->periodo_id = $request->input('periodo_id'); 
-        $actividad->actividad_id = $request->input('actividad_id');
+        $actividad->evento_id = $request->input('evento_id');
         $actividad->user_id = auth()->id(); // Assuming you want to associate the note with the authenticated user
         $actividad->save();
         return redirect()->route('actividades.edit', $actividad->id)->with('success', 'Actividad creada exitosamente.');
@@ -87,12 +87,12 @@ class ActividadesRealizadasController extends Controller
     public function edit(string $id)
     {
         $actividad = ActividadesRealizadas::findOrFail($id); // Encuentra la actividad o devuelve 404
-        $actividades = Actividades::all();
+        $eventos = Eventos::all();
         // $periodos = Periodos::all();
         // $ejercicios = Ejercicio::all();
         $items = $actividad->items(); // Assuming you have a relationship defined in the Avisos model
         $items = ActividadesRealizadasItems::where('actividad_id', $id)->get(); // Assuming you have a AvisosItems model for items related to the note
-        return view('actividades.edit', compact('actividad','actividades','items'));
+        return view('actividades.edit', compact('actividad','eventos','items'));
         // return view('actividades.edit', compact('actividad','periodos','ejercicios','actividades','items'));
     }
 
@@ -116,7 +116,7 @@ class ActividadesRealizadasController extends Controller
         $actividad->descripcion = $request->input('descripcion');
         // $actividad->ejercicio_id = $request->input('ejercicio_id'); 
         // $actividad->periodo_id = $request->input('periodo_id'); 
-        $actividad->actividad_id = $request->input('actividad_id');
+        $actividad->evento_id = $request->input('evento_id');
         $actividad->user_id = auth()->id(); // Assuming you want to
         $actividad->save();
         return redirect()->route('actividades.index');

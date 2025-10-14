@@ -20,8 +20,8 @@ return new class extends Migration
             $table->foreign('ejercicio_id')->references('id')->on('ejercicio_legislativo');
             $table->unsignedBigInteger('periodo_id')->nullable();
             $table->foreign('periodo_id')->references('id')->on('periodos');
-            $table->unsignedBigInteger('actividad_id');
-            $table->foreign('actividad_id')->references('id')->on('actividades');
+            $table->unsignedBigInteger('evento_id');
+            $table->foreign('evento_id')->references('id')->on('eventos');
             $table->integer('activo')->default(0);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
