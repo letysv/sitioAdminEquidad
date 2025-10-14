@@ -39,7 +39,7 @@ class ActividadesRealizadasController extends Controller
      */
     public function apiActividades()
     {
-        $actividades = ActividadesRealizadas::with(['items','actividad:id,nombre'])->get();
+        $actividades = ActividadesRealizadas::with(['items','evento:id,nombre'])->get();
         return response()->json($actividades);
     }
 

@@ -11,6 +11,7 @@
                     <tr>
                         <th class="text-center">ID</th>
                         <th class="text-left">Descripción</th>
+                        <th class="text-left">Actividad</th>
                         @can('actividades.activate')
                         <th class="text-center">Activo</th>
                         @endcan
@@ -24,6 +25,7 @@
                         <tr> 
                             <td class="text-center align-middle">{{ $actividad->id }}</td>
                             <td class="text-left align-middle">{{ $actividad->descripcion }}</td>
+                            <td class="text-left align-middle">{{ $actividad->evento->nombre ?? 'N/A' }}</td>
                             @can('actividades.activate')
                             <td class="text-center align-middle">
                                 {{-- Checkbox para cambiar el estado activo de la nota --}}
