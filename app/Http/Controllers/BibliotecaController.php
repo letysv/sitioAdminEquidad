@@ -44,6 +44,30 @@ class BibliotecaController extends Controller
         return response()->json($bibliotecas);
     }
 
+    public function apiLibrosPorCategoria($categoriaId)
+    {
+        // Buscar por ID de categoría numérico
+        $libros = Biblioteca::with(['items', 'categoria:id,titulo'])
+            ->where('categoria_id', $categoriaId)
+            ->where('activo', true)
+            ->get();
+        
+        // Si no encuentra por ID numérico, buscar por nombre de categoría (slug)
+        if ($libros->isEmpty()) {
+            $categoria = Categorias::where('titulo', 'like', '%' . str_replace('-', ' ', $categoriaId) . '%')
+                ->first();
+            
+            if ($categoria) {
+                $libros = Biblioteca::with(['items', 'categoria:id,titulo'])
+                    ->where('categoria_id', $categoria->id)
+                    ->where('activo', true)
+                    ->get();
+            }
+        }
+        
+        return response()->json($libros);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
