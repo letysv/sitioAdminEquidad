@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('lactancia_items', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
             $table->string('archivo');
             $table->unsignedBigInteger('lactancia_id');
             $table->foreign('lactancia_id')->references('id')->on('lactancia');

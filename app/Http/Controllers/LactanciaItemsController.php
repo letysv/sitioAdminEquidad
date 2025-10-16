@@ -34,10 +34,11 @@ class LactanciaItemsController extends Controller
 
             // Se guarda el registro en la BD
             DB::beginTransaction();
-            $itemActividad = new LactanciaItems();
-            $itemActividad->archivo = $nombreArchivo;
-            $itemActividad->lactancia_id = $request->lactancia_id;
-            $itemActividad->save();
+            $itemLactancia = new LactanciaItems();
+            $itemLactancia->nombre = $request->nombre;
+            $itemLactancia->archivo = $nombreArchivo;
+            $itemLactancia->lactancia_id = $request->lactancia_id;
+            $itemLactancia->save();
             DB::commit();
             return response()->json([
                 'success' => true,

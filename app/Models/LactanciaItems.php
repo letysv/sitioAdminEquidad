@@ -9,7 +9,7 @@ class LactanciaItems extends Model
 {
     use HasFactory;
     protected $table = 'lactancia_items';
-    protected $fillable = ['id', 'archivo', 'lactancia_id'];
+    protected $fillable = ['id', 'nombre', 'archivo', 'lactancia_id'];
 
     public function lactancia()
     {

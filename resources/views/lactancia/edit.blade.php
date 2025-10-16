@@ -23,7 +23,7 @@
                 <table class="table table-light table-hover table-small" id="itemsTable">
                     <thead>
                         <tr>
-                            {{-- <th>Nombre</th> --}}
+                            <th>Nombre</th>
                             <th>Archivo</th>
                             <th>Acción</th>
                         </tr>
@@ -31,7 +31,7 @@
                     <tbody>
                         @foreach ($items as $item)
                         <tr>
-                            {{-- <td class="align-middle">{{ $item->descripcion }}</td> --}}
+                            <td class="align-middle">{{ $item->nombre }}</td>
                             <td class="align-middle">{{ $item->archivo }}</td>
                             <td>
                                 <form id="delete-form-{{ $item->id }}" action="{{ route('lactancia.item.destroy', $item->id) }}" method="POST" class="d-inline">
@@ -57,6 +57,14 @@
             <div class="card p-3">
                 <form class="frmItems" enctype="multipart/form-data">
                     @csrf
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="nombre_items">Nombre</label>
+                                <input type="text" class="form-control" id="nombre_items" name="nombre_items" required>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
@@ -132,7 +140,7 @@
             var nombreArchivo = archivo.name; // Obtiene el nombre del archivo
         }
         data.append('archivo', $('#ctrl_archivo')[0].files[0]);
-        // data.append('descripcion', $("#nombre_item").val());
+        data.append('nombre', $("#nombre_items").val());
         data.append('lactancia_id', $("#lactancia_id").val());
 
         guardarArchivo(data, "{{route('lactancia.item.create')}}");
