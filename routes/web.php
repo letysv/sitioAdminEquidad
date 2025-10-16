@@ -50,6 +50,7 @@ Route::middleware(['auth'])->group(function () {
     require __DIR__ . '/informes.php';
     require __DIR__ . '/enlaces.php';
     require __DIR__ . '/actividades.php';
+    require __DIR__ . '/lactancia.php';
     require __DIR__ . '/roles.php';
     require __DIR__ . '/permisos.php';
 });

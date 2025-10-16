@@ -321,12 +321,6 @@ return [
             'route' => 'usuarios.index',
             'can' => 'usuarios', 
         ],
-        // [
-        //     'text' => 'Centro de estudios',
-        //     'icon' => 'fas fa-fw fa-building',
-        //     'url' => 'usuarios.index'
-        //     // 'can' => 'usuarios', 
-        // ],
         [
             'text' => 'Equipo CEIGyDH',
             'icon' => 'fas fa-fw fa-users',
@@ -381,24 +375,12 @@ return [
             'route' => 'actividades.index',
             'can' => 'actividades', 
         ],
-        // [
-        //     'text' => 'Aviso de privacidad',
-        //     'icon' => 'fas fa-fw fa-exclamation-triangle',
-        //     'url' => 'usuarios.index'
-        //     // 'can' => 'usuarios', 
-        // ],
-        // [
-        //     'text' => 'Contacto',
-        //     'icon' => 'fas fa-fw fa-address-book',
-        //     'url' => 'usuarios.index'
-        //     // 'can' => 'usuarios', 
-        // ],
-        // [
-        //     'text' => 'Sala de lactancia',
-        //     'icon' => 'fas fa-fw fa-baby',
-        //     'url' => 'usuarios.index'
-        //     // 'can' => 'usuarios', 
-        // ],
+        [
+            'text' => 'Sala de lactancia',
+            'icon' => 'fas fa-fw fa-baby',
+            'route' => 'lactancia.index',
+            'can' => 'lactancia', 
+        ],
         [
             'text' => 'Adm desarrollo',
             'icon' => 'fas fa-fw fa-code',

@@ -24,3 +24,4 @@ require __DIR__ . '/api_efemerides.php';
 require __DIR__ . '/api_informes.php';
 require __DIR__ . '/api_enlaces.php';
 require __DIR__ . '/api_actividades.php';
+require __DIR__ . '/api_lactancia.php';
