@@ -6,14 +6,14 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ActividadesSeeder extends Seeder
+class EventosSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-         $actividades = [
+         $eventos = [
             [
                 'nombre' => 'Eventos Propios',
             ],
@@ -28,6 +28,6 @@ class ActividadesSeeder extends Seeder
             ],
         ];
 
-         DB::table('actividades')->insert($actividades);
+         DB::table('eventos')->insert($eventos);
     }
 }
