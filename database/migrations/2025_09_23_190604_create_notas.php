@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('notas', function (Blueprint $table) {
             $table->id();
+            $table->date('fecha');
             $table->string('nombre');
             $table->text('descripcion');
             $table->integer('activo')->default(0);

@@ -10,7 +10,8 @@ class Notas extends Model
     use HasFactory;
     protected $table = 'notas';
 
-    protected $fillable = ['id','nombre', 'descripcion', 'activo']; 
+    protected $fillable = ['id', 'fecha', 'nombre', 'descripcion', 'activo']; 
+    protected $casts = ['fecha' => 'date'];
 
     public function items()
     {

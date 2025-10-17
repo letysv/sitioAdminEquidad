@@ -4,6 +4,16 @@
     <form action="{{ route('notas.store') }}" method="POST">
         @csrf
         <div class="form-group">
+            <label for="fecha">Fecha</label>
+            <input
+                type="date"
+                class="form-control"
+                id="fecha"
+                name="fecha"
+                value="{{ 'fecha', now()->format('Y-m-d') }}"
+                required>
+        </div>
+        <div class="form-group">
             <label for="nombre">Nombre</label>
             <input type="text" class="form-control" id="nombre" name="nombre" required>
         </div>

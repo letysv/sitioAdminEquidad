@@ -4,6 +4,16 @@
     <form action="{{ route('notas.update', $nota->id) }}" method="POST">
         @csrf
         <div class="form-group">
+            <label for="fecha">Fecha</label>
+            <input
+                type="date"
+                class="form-control"
+                id="fecha"
+                name="fecha"
+                value="{{ old('fecha', optional($nota->fecha)->format('Y-m-d')) }}"
+                required>
+        </div>
+        <div class="form-group">
             <label for="nombre">Nombre</label>
             <input type="text" class="form-control" id="nombre" name="nombre" value="{{ $nota->nombre }}" required>
         </div>
@@ -80,7 +90,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="ctrl_archivo" class="form-label">Imágen</label>
+                                    <label for="ctrl_archivo" class="form-label">Imagen</label>
                                     <input type="file" class="form-control" id="ctrl_archivo" name="ctrl_archivo"
                                         required>
                                 </div>

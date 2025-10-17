@@ -54,6 +54,7 @@ class NotasController extends Controller
     public function store(Request $request)
     {
         $nota = new Notas();
+        $nota->fecha = $request->input('fecha');
         $nota->nombre = $request->input('nombre');
         $nota->descripcion = $request->input('descripcion');
         $nota->user_id = auth()->id(); // Assuming you want to associate the note with the authenticated user
@@ -96,6 +97,7 @@ class NotasController extends Controller
     public function update(Request $request, string $id)
     {
         $nota = Notas::find($id);
+        $nota->fecha = $request->input('fecha');
         $nota->nombre = $request->input('nombre');
         $nota->descripcion = $request->input('descripcion');
         $nota->user_id = auth()->id(); // Assuming you want to associate the note with the authenticated user
